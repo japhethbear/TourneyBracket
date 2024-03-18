@@ -199,9 +199,11 @@
         {% for teamA, teamB in matchups.East %}
         <li class='spacer'>&nbsp;</li>
         <li class='game-left game-top'>
+          <input type="radio" name="east-{{ loop.index }}" value="{{ teamA }}" data-prev-matchup="east-{{ loop.index }}" onclick="selectTeam(this)" />
           <span>{{ teamA }}</span>
         </li>
         <li class='game-left game-bottom'>
+          <input type="radio" name="east-{{ loop.index }}" value="{{ teamB }}" data-prev-matchup="east-{{ loop.index }}" onclick="selectTeam(this)"/>
           <span>{{ teamB }}</span>
         </li>
         <li class='spacer'>&nbsp;</li>
@@ -212,9 +214,11 @@
         {% for teamA, teamB in matchups.West %}
         <li class='spacer'>&nbsp;</li>
         <li class='game-left game-top'>
+          <input type="radio" name="west-{{ loop.index }}" value="{{ teamA }}" data-prev-matchup="west-{{ loop.index }}" />
           <span>{{ teamA }}</span>
         </li>
         <li class='game-left game-bottom'>
+          <input type="radio" name="west-{{ loop.index }}" value="{{ teamB }}" data-prev-matchup="west-{{ loop.index }}"/>
           <span>{{ teamB }}</span>
         </li>
         <li class='spacer'>&nbsp;</li>
@@ -225,36 +229,52 @@
       <ul class='round round-1'>
         <li class='spacer'>&nbsp;</li>
         <li class='game-left game-top'></li>
+          <input type="hidden" name="east-1" value="" data-prev-matchup="east-1"/>
         <li class='game-left spacer'>&nbsp;</li>
         <li class='game-left game-bottom'></li>
+          <input type="hidden" name="east-2" value="" data-prev-matchup="east-2"/>
         <li class='spacer'>&nbsp;</li>
         <li class='game-left game-top'></li>
+          <input type="hidden" name="east-3" value="" data-prev-matchup="east-3"/>
         <li class='game-left spacer'>&nbsp;</li>
         <li class='game-left game-bottom'></li>
+          <input type="hidden" name="east-4" value="" data-prev-matchup="east-4"/>
         <li class='spacer'>&nbsp;</li>
         <li class='game-left game-top'></li>
+          <input type="hidden" name="east-5" value="" data-prev-matchup="east-5"/>
         <li class='game-left spacer'>&nbsp;</li>
         <li class='game-left game-bottom'></li>
+          <input type="hidden" name="east-6" value="" data-prev-matchup="east-6"/>
         <li class='spacer'>&nbsp;</li>
         <li class='game-left game-top'></li>
+          <input type="hidden" name="east-7" value="" data-prev-matchup="east-7"/>
         <li class='game-left spacer'>&nbsp;</li>
         <li class='game-left game-bottom'></li>
+          <input type="hidden" name="east-8" value="" data-prev-matchup="east-8"/>
         <li class='spacer'>&nbsp;</li>
         <li class='game-left game-top'></li>
+          <input type="hidden" name="west-1" value="" data-prev-matchup="west-1"/>
         <li class='game-left spacer'>&nbsp;</li>
         <li class='game-left game-bottom'></li>
+          <input type="hidden" name="west-2" value="" data-prev-matchup="west-2"/>
         <li class='spacer'>&nbsp;</li>
         <li class='game-left game-top'></li>
+          <input type="hidden" name="west-3" value="" data-prev-matchup="west-3"/>
         <li class='game-left spacer'>&nbsp;</li>
         <li class='game-left game-bottom'></li>
+          <input type="hidden" name="west-4" value="" data-prev-matchup="west-4"/>
         <li class='spacer'>&nbsp;</li>
         <li class='game-left game-top'></li>
+          <input type="hidden" name="west-5" value="" data-prev-matchup="west-5"/>
         <li class='game-left spacer'>&nbsp;</li>
         <li class='game-left game-bottom'></li>
+          <input type="hidden" name="west-6" value="" data-prev-matchup="west-6"/>
         <li class='spacer'>&nbsp;</li>
         <li class='game-left game-top'></li>
+          <input type="hidden" name="west-7" value="" data-prev-matchup="west-7"/>
         <li class='game-left spacer'>&nbsp;</li>
         <li class='game-left game-bottom'></li>
+          <input type="hidden" name="west-8" value="" data-prev-matchup="west-8"/>
         <li class='spacer'>&nbsp;</li>
       </ul>
       <ul class='round round-2'>
@@ -387,9 +407,11 @@
         {% for teamA, teamB in matchups.South %}
         <li class='spacer'>&nbsp;</li>
         <li class='game-left game-top'>
+          <input type="radio" name="south-{{ loop.index }}" value="{{ teamA }}">
           <span>{{ teamA }}</span>
         </li>
         <li class='game-left game-bottom'>
+          <input type="radio" name="south-{{ loop.index }}" value="{{ teamB }}">
           <span>{{ teamB }}</span>
         </li>
         <li class='spacer'>&nbsp;</li>
@@ -400,9 +422,11 @@
         {% for teamA, teamB in matchups.Midwest %}
         <li class='spacer'>&nbsp;</li>
         <li class='game-left game-top'>
+          <input type="radio" name="midwest-{{ loop.index }}" value="{{ teamA }}">
           <span>{{ teamA }}</span>
         </li>
         <li class='game-left game-bottom'>
+          <input type="radio" name="midwest-{{ loop.index }}" value="{{ teamB }}">
           <span>{{ teamB }}</span>
         </li>
         <li class='spacer'>&nbsp;</li>
@@ -412,4 +436,21 @@
     </div>
   </section>
 </body>
+<script>
+  // Function to handle the selection of a team
+  function selectTeam(input) {
+    // Get the value of the selected team
+    var selectedTeam = input.value;
+
+    console.log(selectedTeam);
+    
+    // Find the corresponding matchup input elements for the next round
+    var nextRoundInputs = document.querySelectorAll('[data-prev-matchup="' + input.name + '"]');
+    
+    // Update the value of the corresponding matchup input elements
+    nextRoundInputs.forEach(function(nextRoundInput) {
+      nextRoundInput.value = selectedTeam;
+    });
+  }
+</script>
 </html>
